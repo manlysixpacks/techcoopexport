@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard 2 trang</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      width: 100vw;
+      height: 100vh;
+    }
+    iframe {
+      border: none;
+      width: 50vw;   /* mỗi trang chiếm nửa ngang màn hình */
+      height: 100vh; /* full dọc */
+    }
+  </style>
+  <!-- Auto reload toàn bộ dashboard mỗi 300 giây (5 phút) -->
+  <meta http-equiv="refresh" content="1800">
+</head>
+<body>
+  <div class="container">
+    <!-- Bên trái: HiFleet -->
+    <iframe src="https://www.hifleet.com/web/" loading="lazy"></iframe>
+
+    <!-- Bên phải: Farmnet -->
+    <iframe src="https://www.worldometers.info/world-map/" loading="lazy"></iframe>
+  </div>
+</body>
+</html>
