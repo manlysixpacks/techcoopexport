@@ -22,8 +22,12 @@
 
     iframe {
       border: none;
-      width: 50vw;   /* mỗi trang chiếm nửa ngang */
       height: 100vh; /* full dọc */
+    }
+
+    /* 3 cột: mỗi cột ~1/3 màn hình */
+    .col {
+      width: 33.33vw;
     }
 
     /* Ô hiển thị giờ ở góc trên bên trái */
@@ -48,14 +52,22 @@
   <!-- Đồng hồ -->
   <div class="clock" id="clock"></div>
 
-  <!-- 2 trang web -->
+  <!-- 3 trang web -->
   <div class="container">
-    <!-- BÊN TRÁI: HiFleet -->
-    <iframe src="https://www.hifleet.com/web/" loading="lazy"></iframe>
+    <!-- CỘT 1: HiFleet -->
+    <iframe class="col"
+            src="https://www.hifleet.com/web/"
+            loading="lazy"></iframe>
 
-    <!-- BÊN PHẢI: Worldometer map (mày đang test) -->
-    <!-- Muốn đổi sang trang khác thì chỉ thay URL trong src ở đây -->
-    <iframe src="https://www.worldometers.info/world-population/population-by-country/" loading="lazy"></iframe>
+    <!-- CỘT 2: Worldometer (có thể đổi URL nếu mày muốn) -->
+    <iframe class="col"
+            src="https://www.worldometers.info/world-population/population-by-country/"
+            loading="lazy"></iframe>
+
+    <!-- CỘT 3: Tỷ giá Vietcombank -->
+    <iframe class="col"
+            src="https://www.vietcombank.com.vn/vi-VN/KHCN/Cong-cu-Tien-ich/Ty-gia"
+            loading="lazy"></iframe>
   </div>
 
   <script>
