@@ -44,9 +44,7 @@
       letter-spacing: 0.5px;
     }
   </style>
-
-  <!-- Auto reload toàn bộ dashboard mỗi 300 giây (5 phút) -->
-  <meta http-equiv="refresh" content="300">
+  <!-- KHÔNG dùng meta refresh nữa để khỏi reload cả HiFleet -->
 </head>
 <body>
   <!-- Đồng hồ -->
@@ -54,26 +52,27 @@
 
   <!-- 2 trang web -->
   <div class="container">
-    <!-- CỘT 1: Report Techcoop -->
+    <!-- CỘT 1: Report Techcoop (sẽ được reload định kỳ bằng JS) -->
     <iframe class="col"
+            id="frame-techcoop"
             src="https://report.techcoop.vn/login/"
             loading="lazy"></iframe>
 
-    <!-- CỘT 2: Ship tracking) -->
+    <!-- CỘT 2: Ship tracking - HiFleet (KHÔNG bị reload) -->
     <iframe class="col"
+            id="frame-hifleet"
             src="https://www.hifleet.com/"
             loading="lazy"></iframe>
   </div>
 
   <script>
-    // Hàm format số có 2 chữ số
+    // ===== Đồng hồ =====
     function pad2(n) {
       return n < 10 ? '0' + n : n;
     }
 
     function updateClock() {
       const now = new Date();
-
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const day = now.getDate();
@@ -81,7 +80,6 @@
       const minute = now.getMinutes();
       const second = now.getSeconds();
 
-      // Định dạng: HH:MM:SS - DD/MM/YYYY
       const text =
         pad2(hour) + ':' +
         pad2(minute) + ':' +
@@ -92,15 +90,28 @@
         year;
 
       const el = document.getElementById('clock');
-      if (el) {
-        el.textContent = text;
+      if (el) el.textContent = text;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ===== Auto reload riêng iframe Techcoop =====
+    function reloadTechcoop() {
+      const frame = document.getElementById('frame-techcoop');
+      if (frame) {
+        // Giữ nguyên URL gốc, chỉ gán lại src để browser reload iframe đó
+        const currentSrc = frame.src;
+        frame.src = currentSrc;
       }
     }
 
-    // Cập nhật ngay khi mở
-    updateClock();
-    // Sau đó cập nhật mỗi 1 giây
-    setInterval(updateClock, 1000);
+    // ĐỔI THỜI GIAN Ở ĐÂY:
+    // 5 phút = 5 * 60 * 1000 ms
+    const RELOAD_INTERVAL_MS = 5 * 60 * 1000;
+
+    // Bắt đầu đếm sau khi trang load xong
+    setInterval(reloadTechcoop, RELOAD_INTERVAL_MS);
   </script>
 </body>
 </html>
