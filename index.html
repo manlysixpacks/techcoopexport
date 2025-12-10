@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard Xuất khẩu Techcoop</title>
+  <title>Dashboard 2 trang</title>
   <style>
     html, body {
       margin: 0;
@@ -25,12 +25,12 @@
       height: 100vh; /* full dọc */
     }
 
-    /* 3 cột: mỗi cột ~1/3 màn hình */
+    /* 2 cột: mỗi cột 1/2 màn hình */
     .col {
-      width: 33.33vw;
+      width: 50vw;
     }
 
-    /* Ô hiển thị giờ ở góc trên bên trái */
+    /* Đồng hồ góc trên trái */
     .clock {
       position: fixed;
       top: 8px;
@@ -52,21 +52,16 @@
   <!-- Đồng hồ -->
   <div class="clock" id="clock"></div>
 
-  <!-- 3 trang web -->
+  <!-- 2 trang web -->
   <div class="container">
-    <!-- CỘT 1: HiFleet -->
+    <!-- CỘT 1: MarineTraffic - chi tiết tàu -->
     <iframe class="col"
             src="https://www.marinetraffic.com/en/ais/details/ships/shipid:421518"
             loading="lazy"></iframe>
 
-    <!-- CỘT 2: Worldometer (có thể đổi URL nếu mày muốn) -->
+    <!-- CỘT 2: Report Techcoop -->
     <iframe class="col"
-            src="https://report.techcoop.vn/superset/dashboard/31/"
-            loading="lazy"></iframe>
-
-    <!-- CỘT 3: Tỷ giá Vietcombank -->
-    <iframe class="col"
-            src="https://www.vietcombank.com.vn/vi-VN/KHCN/Cong-cu-Tien-ich/Ty-gia"
+            src="https://report.techcoop.vn/login/"
             loading="lazy"></iframe>
   </div>
 
@@ -109,4 +104,3 @@
   </script>
 </body>
 </html>
-
