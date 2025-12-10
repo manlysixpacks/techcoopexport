@@ -10,30 +10,90 @@
       height: 100%;
       overflow: hidden;
       background: #000;
+      font-family: Arial, sans-serif;
     }
+
     .container {
       display: flex;
       flex-direction: row;
       width: 100vw;
       height: 100vh;
     }
+
     iframe {
       border: none;
-      width: 50vw;   /* mỗi trang chiếm nửa ngang màn hình */
+      width: 50vw;   /* mỗi trang chiếm nửa ngang */
       height: 100vh; /* full dọc */
     }
+
+    /* Ô hiển thị giờ ở góc trên bên trái */
+    .clock {
+      position: fixed;
+      top: 8px;
+      left: 12px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
   </style>
+
   <!-- Auto reload toàn bộ dashboard mỗi 300 giây (5 phút) -->
-  <meta http-equiv="refresh" content="1800">
+  <meta http-equiv="refresh" content="300">
 </head>
 <body>
+  <!-- Đồng hồ -->
+  <div class="clock" id="clock"></div>
+
+  <!-- 2 trang web -->
   <div class="container">
-    <!-- Bên trái: HiFleet -->
+    <!-- BÊN TRÁI: HiFleet -->
     <iframe src="https://www.hifleet.com/web/" loading="lazy"></iframe>
 
-    <!-- Bên phải: Farmnet -->
-    <iframe src="https://www.worldometers.info/world-map/" loading="lazy"></iframe>
+    <!-- BÊN PHẢI: Worldometer map (mày đang test) -->
+    <!-- Muốn đổi sang trang khác thì chỉ thay URL trong src ở đây -->
+    <iframe src="https://www.worldometers.info/world-population/population-by-country/" loading="lazy"></iframe>
   </div>
-</body>
 
+  <script>
+    // Hàm format số có 2 chữ số
+    function pad2(n) {
+      return n < 10 ? '0' + n : n;
+    }
+
+    function updateClock() {
+      const now = new Date();
+
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+
+      // Định dạng: HH:MM:SS - DD/MM/YYYY
+      const text =
+        pad2(hour) + ':' +
+        pad2(minute) + ':' +
+        pad2(second) +
+        '  -  ' +
+        pad2(day) + '/' +
+        pad2(month) + '/' +
+        year;
+
+      const el = document.getElementById('clock');
+      if (el) {
+        el.textContent = text;
+      }
+    }
+
+    // Cập nhật ngay khi mở
+    updateClock();
+    // Sau đó cập nhật mỗi 1 giây
+    setInterval(updateClock, 1000);
+  </script>
+</body>
 </html>
